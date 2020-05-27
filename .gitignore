@@ -1,0 +1,5 @@
+venv/*
+train/*
+thisframe.png
+*.h5
+labels.txt
