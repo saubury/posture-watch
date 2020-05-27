@@ -6,6 +6,7 @@ import time
 from tensorflow.keras import layers, models, callbacks
 from sklearn.utils import class_weight
 from pathlib import Path
+from playsound import playsound
 
 # Config settings
 image_dimensions = (224, 224) 
@@ -14,8 +15,9 @@ model_name = "posture_model.h5"
 keyboard_spacebar = 32
 training_dir = "train"
 labels_text = ['Good', 'Slumped']
+mp3file = 'sounds/eating.mp3'
 
-def doliveview():
+def doliveview(soundson):
     mymodel = models.load_model(model_name)
 
     # Video capture stuff
@@ -36,12 +38,14 @@ def doliveview():
         predictions = mymodel.predict(im)
         class_pred = np.argmax(predictions) 
         conf = predictions[0][class_pred]
-        msg = "Predict:{} {}%".format(labels_text[class_pred], round(int(conf*100)))
+        msg = "{} {}%".format(labels_text[class_pred], round(int(conf*100)))
 
-        for i, p in enumerate(predictions[0]):
-            msg = "{} {}:{}%".format(msg, i+1, round(int(p*100)))
+        if (soundson and class_pred==1):
+            # If slumped with sounds on
+            playsound(mp3file)
 
-        im_color = cv2.resize(im_color, (640*2, 480*2), interpolation = cv2.INTER_AREA)
+        im_color = cv2.resize(im_color, (800, 480), interpolation = cv2.INTER_AREA)
+        im_color = cv2.flip(im_color, flipCode=1) # flip horizontally
         im_color = cv2.putText(im_color, msg, (10, 70),  cv2.FONT_HERSHEY_SIMPLEX, 2,  (0, 0, 255), thickness = 3)
 
         cv2.imshow("", im_color)
@@ -130,22 +134,19 @@ def main():
     parser.add_argument("--capture-slump", help="capture example of poor, slumped posture", action="store_true")
     parser.add_argument("--train", help="train model with captured images", action="store_true")
     parser.add_argument("--live", help="live view applying model to each frame", action="store_true")
+    parser.add_argument("--sound", help="in conjunction with live view will make a sound", action="store_true")
     args = parser.parse_args()
 
     if args.train:
         do_training()
     elif args.live:
-        doliveview()
+        doliveview(args.sound)
     elif args.capture_good:
         do_capture_action(1, 'Good')
     elif args.capture_slump:
         do_capture_action(2, 'Slumped')
     else:
         parser.print_help()
-
-    # if len(sys.argv)==1:
-    #     parser.print_help(sys.stderr)
-    #     sys.exit(1)
 
 if __name__ == "__main__":
     main()

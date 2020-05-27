@@ -18,22 +18,29 @@ pip install -r requirements.txt
 
 ## Capture
 
+Press the "space" bar to stop capture. Note: the first run may take a few minutes to start
+
 ```
-python posture.py --captureaction 01 --label "Good"
-python posture.py --captureaction 02 --label "Slumped"
+python posture-watch.py --capture-good
+python posture-watch.py --capture-slump
 ```
 
 ## Train
 
 ```
-python posture.py --train
+python posture-watch.py --train
 ```
 
 
 ## Live Video
 
 ```
-python posture.py --live
+python posture-watch.py --live
 ```
 
+## Cleanup
+
+```
+rm -fr train/
+```
 
