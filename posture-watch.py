@@ -11,9 +11,9 @@ from playsound import playsound
 # Config settings
 image_dimensions = (224, 224) 
 epochs = 10
-model_name = "posture_model.h5"
+model_name = 'posture_model.h5'
 keyboard_spacebar = 32
-training_dir = "train"
+training_dir = 'train'
 labels_text = ['Good', 'Slumped']
 mp3file = 'sounds/eating.mp3'
 
@@ -23,12 +23,12 @@ def doliveview(soundson):
     # Video capture stuff
     videocapture = cv2.VideoCapture(0)
     if not videocapture.isOpened():
-        raise IOError("Cannot open webcam")
+        raise IOError('Cannot open webcam')
 
     while True:
         _, frame = videocapture.read()
-        cv2.imwrite("thisframe.png", frame)
-        im_color = cv2.imread("thisframe.png")
+        cv2.imwrite('thisframe.png', frame)
+        im_color = cv2.imread('thisframe.png')
         im = cv2.cvtColor(im_color, cv2.COLOR_BGR2GRAY)
 
         im = cv2.resize(im, image_dimensions)
@@ -38,7 +38,7 @@ def doliveview(soundson):
         predictions = mymodel.predict(im)
         class_pred = np.argmax(predictions) 
         conf = predictions[0][class_pred]
-        msg = "{} {}%".format(labels_text[class_pred], round(int(conf*100)))
+        msg = '{} {}%'.format(labels_text[class_pred], round(int(conf*100)))
 
         if (soundson and class_pred==1):
             # If slumped with sounds on
@@ -48,8 +48,8 @@ def doliveview(soundson):
         im_color = cv2.flip(im_color, flipCode=1) # flip horizontally
         im_color = cv2.putText(im_color, msg, (10, 70),  cv2.FONT_HERSHEY_SIMPLEX, 2,  (0, 0, 255), thickness = 3)
 
-        cv2.imshow("", im_color)
-        cv2.moveWindow("", 20, 20);
+        cv2.imshow('', im_color)
+        cv2.moveWindow('', 20, 20);
         key = cv2.waitKey(20)
 
         if key == keyboard_spacebar:
@@ -62,18 +62,18 @@ def doliveview(soundson):
 
 def do_capture_action(action_n, action_label):
     img_count = 0
-    output_folder = "{}/action_{:02}".format(training_dir, action_n)
-    print("Capturing samples for {} into folder {}".format(action_n, output_folder))
+    output_folder = '{}/action_{:02}'.format(training_dir, action_n)
+    print('Capturing samples for {} into folder {}'.format(action_n, output_folder))
     Path(output_folder).mkdir(parents=True, exist_ok=True)
 
     # Video capture stuff
     videocapture = cv2.VideoCapture(0)
     if not videocapture.isOpened():
-        raise IOError("Cannot open webcam")
+        raise IOError('Cannot open webcam')
 
     while True:
         _, frame = videocapture.read()
-        filename = "{}/{:08}.png".format(output_folder, img_count)
+        filename = '{}/{:08}.png'.format(output_folder, img_count)
         cv2.imwrite(filename, frame)
         img_count += 1
         key = cv2.waitKey(1000)
@@ -94,9 +94,9 @@ def do_training():
 
     class_label_indexer = 0
     for c in class_folders:
-        print("Training with class {}".format(c))
-        for f in os.listdir("{}/{}".format(training_dir, c)):
-            im = cv2.imread("{}/{}/{}".format(training_dir, c, f), 0)
+        print('Training with class {}'.format(c))
+        for f in os.listdir('{}/{}'.format(training_dir, c)):
+            im = cv2.imread('{}/{}/{}'.format(training_dir, c, f), 0)
             im = cv2.resize(im, image_dimensions)
             train_images.append(im)
             train_labels.append(class_label_indexer)
@@ -130,11 +130,11 @@ def do_training():
     
 def main():
     parser = argparse.ArgumentParser(description='Posture monitor')
-    parser.add_argument("--capture-good", help="capture example of good, healthy posture", action="store_true")
-    parser.add_argument("--capture-slump", help="capture example of poor, slumped posture", action="store_true")
-    parser.add_argument("--train", help="train model with captured images", action="store_true")
-    parser.add_argument("--live", help="live view applying model to each frame", action="store_true")
-    parser.add_argument("--sound", help="in conjunction with live view will make a sound", action="store_true")
+    parser.add_argument('--capture-good', help='capture example of good, healthy posture', action='store_true')
+    parser.add_argument('--capture-slump', help='capture example of poor, slumped posture', action='store_true')
+    parser.add_argument('--train', help='train model with captured images', action='store_true')
+    parser.add_argument('--live', help='live view applying model to each frame', action='store_true')
+    parser.add_argument('--sound', help='in conjunction with live view will make a sound', action='store_true')
     args = parser.parse_args()
 
     if args.train:
@@ -148,5 +148,5 @@ def main():
     else:
         parser.print_help()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
