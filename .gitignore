@@ -3,3 +3,4 @@ train/*
 thisframe.png
 *.h5
 labels.txt
+venv2/*
