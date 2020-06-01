@@ -4,3 +4,4 @@ thisframe.png
 *.h5
 labels.txt
 venv2/*
+sounds/eating.mp3
