@@ -15,7 +15,7 @@ model_name = 'posture_model.h5'
 keyboard_spacebar = 32
 training_dir = 'train'
 labels_text = ['Good', 'Slumped']
-mp3file = 'sounds/eating.mp3'
+mp3file = 'sounds/what.mp3'
 
 def doliveview(soundson):
     mymodel = models.load_model(model_name)
