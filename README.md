@@ -2,7 +2,7 @@
 
 Monitor good posture - with machine learning. Ensure proper office ergonomics with Tensorflow, a webcam and OpenCV Python real-time computer vision libraries
 
-If you sit behind a desk for hours at a time, you're possibly going to slump over time. This may result in neck and back pain or sore wrists or fingers. This can be avoided by teaching a machine to recognise "good" posture from "bad" posture.  To encourage better posture, instant feedback with a quick sound everytime poor office ergonomics are observed.  Model training and monitoring is handled locally on device. 
+If you sit behind a desk for hours at a time, you're possibly going to slump. This may result in neck and back pain. This can be avoided by teaching a machine to recognise "good" posture from "bad" posture.  To encourage better posture, instant feedback with a quick sound everytime poor office ergonomics are observed.  Model training and monitoring is handled locally on device. 
 
 
 ## How does this work?
