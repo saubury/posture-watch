@@ -14,8 +14,7 @@ epochs = 10
 model_name = 'posture_model.h5'
 keyboard_spacebar = 32
 training_dir = 'train'
-labels_text = ['Good', 'Slumped']
-mp3file = 'sounds/eating.mp3'
+mp3file = 'sounds/what.mp3'
 
 def doliveview(soundson):
     mymodel = models.load_model(model_name)
@@ -38,7 +37,6 @@ def doliveview(soundson):
         predictions = mymodel.predict(im)
         class_pred = np.argmax(predictions) 
         conf = predictions[0][class_pred]
-        msg = '{} {}%'.format(labels_text[class_pred], round(int(conf*100)))
 
         if (soundson and class_pred==1):
             # If slumped with sounds on
@@ -46,7 +44,15 @@ def doliveview(soundson):
 
         im_color = cv2.resize(im_color, (800, 480), interpolation = cv2.INTER_AREA)
         im_color = cv2.flip(im_color, flipCode=1) # flip horizontally
-        im_color = cv2.putText(im_color, msg, (10, 70),  cv2.FONT_HERSHEY_SIMPLEX, 2,  (0, 0, 255), thickness = 3)
+
+        if (class_pred==1):
+            # Slumped
+            im_color = cv2.putText(im_color, 'Slumped posture', (10, 70),  cv2.FONT_HERSHEY_SIMPLEX, 2,  (0, 0, 255), thickness = 3)
+        else:
+            im_color = cv2.putText(im_color, 'Good posture', (10, 70),  cv2.FONT_HERSHEY_SIMPLEX, 2,  (0, 255, 0), thickness = 2)
+
+        msg = 'Confidence {}%'.format(round(int(conf*100)))
+        im_color = cv2.putText(im_color, msg, (15, 110),  cv2.FONT_HERSHEY_SIMPLEX, 1,  (200, 200, 255), thickness = 2)
 
         cv2.imshow('', im_color)
         cv2.moveWindow('', 20, 20);
