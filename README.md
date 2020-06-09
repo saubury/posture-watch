@@ -2,6 +2,9 @@
 
 Monitor good posture - with machine learning. Ensure proper office ergonomics with Tensorflow, a webcam and OpenCV Python real-time computer vision libraries
 
+![Final classification](./docs/teddy-posture.gif)
+
+
 If you sit behind a desk for hours at a time, you're possibly going to slump. This may result in neck and back pain. This can be avoided by teaching a machine to recognise "good" posture from "bad" posture.  To encourage better posture, instant feedback with a quick sound everytime poor office ergonomics are observed.  Model training and monitoring is handled locally on device. 
 
 
@@ -12,7 +15,6 @@ Machine learning packages available for Python 3
 - [Scikit-learn](https://scikit-learn.org) - open source Python machine learning library supporting supervised learning & weightings
 - [Tensorflow Keras](https://www.tensorflow.org/guide/keras/overview) - high-level API to build and train models 
 - [OpenCV](https://opencv.org/) - library of programming functions for real-time computer vision
-
 
 
 ## Setup
@@ -31,6 +33,8 @@ pip install -r requirements.txt
 
 
 ## Training
+
+![Training images](./docs/training.jpg)
 
 Firstly we need to capture photos of "good posture" and "slumped posture". These images are required as input to train supervised learning algoritm. In capture mode a sample image is captured every second and saved in a training folder.  Run the capture mode whilst moving a bit in space to give a variety amongst the images. Press the "space" bar (with the preview frame in focus) to stop capture after about 30 images (30 secomds) have been captured. 
 
@@ -56,6 +60,8 @@ python posture-watch.py --train
 ## Live Video
 
 With the model trained we can test the classification by running a live video feed from the webcam into the model. The classification and predication confidence is overlaind onto the image. Press the "space" bar (with the preview frame in focus) to stop.
+
+![Classified image](./docs/demo-classified.jpg)
 
 ```
 python posture-watch.py --live
