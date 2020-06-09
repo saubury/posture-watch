@@ -6,7 +6,9 @@ import time
 from tensorflow.keras import layers, models, callbacks
 from sklearn.utils import class_weight
 from pathlib import Path
-from playsound import playsound
+
+# Add this in if you require sounds
+# from playsound import playsound
 
 # Config settings
 image_dimensions = (224, 224) 
