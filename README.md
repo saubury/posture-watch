@@ -18,8 +18,11 @@ Machine learning packages available for Python 3
 
 
 ## Setup
+These instructions have been tested on a Mac, and a Raspberry Pi [Raspberry Pi 4 Instructions](./raspberry-pi/raspberry-pi.md). 
 
-Ensure Python 3, virtualenv and pip are insatlled.
+
+
+Ensure Python 3, `virtualenv` and `pip` are insatlled.
 
 ```
 which python3

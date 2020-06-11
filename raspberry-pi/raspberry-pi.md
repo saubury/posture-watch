@@ -1,4 +1,16 @@
-Random things done to get running on Raspberry Pi 4. Most of this is probably unnecessary
+# Raspberry Pi
+
+Random things done to get running on Raspberry Pi 4.
+
+## Setup
+
+```
+pip install -r requirements-pi4.txt 
+```
+
+
+## Helper Packages
+Most of this is probably unnecessary
 
 ```
 sudo apt-get update && sudo apt-get upgrade
