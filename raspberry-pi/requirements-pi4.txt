@@ -15,7 +15,7 @@ joblib==0.15.1
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 Markdown==3.2.2
-numpy==1.18.5
+numpy==1.22.0
 oauthlib==3.1.0
 opencv-python==3.4.6.27
 opt-einsum==3.2.1
