@@ -19,7 +19,7 @@ numpy==1.18.5
 oauthlib==3.1.0
 opencv-python==3.4.6.27
 opt-einsum==3.2.1
-protobuf==3.12.2
+protobuf==3.18.3
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 requests==2.23.0
